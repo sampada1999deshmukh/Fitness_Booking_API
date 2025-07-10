@@ -1,5 +1,5 @@
 import pytest
-from fitness_booking_api import create_app, db
+from app import create_app, db
 
 from app.fitness_booking_api.models import FitnessClass, Booking
 from flask import json

@@ -3,11 +3,6 @@ from .service import *
 
 bp = Blueprint('check', __name__, url_prefix='/check')
 
-# @bp.route('/', methods=['GET'])
-# def home():
-#     return f" HELLO , KEEP IT UP "
-
-
 
 @bp.route('/classes', methods=['GET'])
 def get_classes():
