@@ -1,4 +1,5 @@
 from app import db
+import os
 from .models import User,FitnessClass,Booking
 from flask import jsonify
 from datetime import datetime
@@ -6,6 +7,14 @@ import re
 from pytz import timezone, utc
 from pytz import timezone
 import logging
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
+
+
+# Load environment variables from .env file
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +49,34 @@ def get_all_upcoming_classes():
 def is_valid_email(email):
     pattern = r"^[\w\.-]+@[\w\.-]+\.\w{2,}$"
     return re.match(pattern, email)
+
+def send_email_notification(to_email, subject, body):
+    try:
+        smtp_email = os.getenv('SMTP_EMAIL')
+        smtp_password = os.getenv('SMTP_PASSWORD')
+        smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
+        smtp_port = int(os.getenv('SMTP_PORT', 587))
+
+        if not smtp_email or not smtp_password:
+            logger.warning("SMTP credentials not found. Skipping email.")
+            return
+
+        msg = MIMEMultipart()
+        msg['From'] = smtp_email
+        msg['To'] = to_email
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain'))
+
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+        server.login(smtp_email, smtp_password)
+        server.sendmail(smtp_email, to_email, msg.as_string())
+        server.quit()
+
+        logger.info(f"Email sent successfully to {to_email}")
+    except Exception as e:
+        logger.error(f"Failed to send email to {to_email}: {e}")
+
 
 def make_booking(data):
     try:
@@ -99,7 +136,18 @@ def make_booking(data):
         db.session.add(booking)
         db.session.commit()
 
+        subject = "Fitness Class Booking Confirmation"
+        body = f"""
+               Hi {client_name},
+
+               Your booking for the class '{fitness_class.name}' on {fitness_class.date_time.strftime('%Y-%m-%d %H:%M')} has been confirmed.
+
+               Thank you!
+               """
+        send_email_notification("sampada1999deshmukh@gmail.com", subject, body)
+
         logger.info(f"Class booked successfully: {booking}")
+
         return jsonify({
             "msg": "Booking successful",
             "booking": booking.to_dict()}), 201

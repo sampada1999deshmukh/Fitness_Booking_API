@@ -10,4 +10,8 @@ benv/
 .idea/
 .vscode/
 
+#Enviroment Variables
+.env
 
+# Test result cache
+.pytest_cache/

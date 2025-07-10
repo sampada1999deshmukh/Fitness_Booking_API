@@ -3,6 +3,7 @@
 from app import db
 from datetime import datetime
 
+
 class User(db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
