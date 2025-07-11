@@ -9,6 +9,7 @@ def get_classes():
     classes = get_all_upcoming_classes()
     return classes
 
+
 @bp.route('/book', methods=['POST'])
 def book_class():
     data = request.get_json()

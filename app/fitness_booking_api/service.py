@@ -1,6 +1,6 @@
 from app import db
 import os
-from .models import User,FitnessClass,Booking
+from .models import FitnessClass,Booking
 from flask import jsonify
 from datetime import datetime
 import re
@@ -13,7 +13,7 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 
 
-# Load environment variables from .env file
+
 load_dotenv()
 
 logger = logging.getLogger(__name__)
@@ -144,7 +144,7 @@ def make_booking(data):
 
                Thank you!
                """
-        send_email_notification("sampada1999deshmukh@gmail.com", subject, body)
+        send_email_notification(client_email, subject, body)
 
         logger.info(f"Class booked successfully: {booking}")
 

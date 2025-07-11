@@ -7,9 +7,9 @@ IST = timezone('Asia/Kolkata')
 app = create_app()
 
 seed_classes = [
-    FitnessClass(name="Zumba", date_time=IST.localize(datetime(2025, 7, 10, 7, 30)), instructor="Sakshi", total_slots=15, available_slots=12),
-    FitnessClass(name="Yoga", date_time=IST.localize(datetime(2025, 7, 11, 9, 0)), instructor="Snehal", total_slots=20, available_slots=20),
-    FitnessClass(name="Yoga", date_time=IST.localize(datetime(2025, 7, 11, 7, 0)), instructor="Snehal", total_slots=10, available_slots=7),
+    FitnessClass(name="Zumba", date_time=IST.localize(datetime(2025, 7, 18, 7, 30)), instructor="Sakshi", total_slots=15, available_slots=12),
+    FitnessClass(name="Yoga", date_time=IST.localize(datetime(2025, 7, 19, 9, 0)), instructor="Snehal", total_slots=20, available_slots=20),
+    FitnessClass(name="Yoga", date_time=IST.localize(datetime(2025, 7, 20, 7, 0)), instructor="Snehal", total_slots=10, available_slots=7),
     FitnessClass(name="Zumba", date_time=IST.localize(datetime(2025, 7, 12, 8, 0)), instructor="Ram", total_slots=12, available_slots=10),
     FitnessClass(name="HIIT", date_time=IST.localize(datetime(2025, 7, 13, 6, 30)), instructor="Divya", total_slots=20, available_slots=18),
 ]
