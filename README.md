@@ -44,6 +44,7 @@ payload
 Get all bookings by a client's email
 /check/bookings/<email> or john@example.com
 
+
 #7. Run Tests
 pytest app/tests/
 
