@@ -15,3 +15,7 @@ benv/
 
 # Test result cache
 .pytest_cache/
+
+# Logs
+logs/
+

@@ -13,10 +13,8 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 
 
-
-load_dotenv()
-
 logger = logging.getLogger(__name__)
+load_dotenv()
 
 def get_all_upcoming_classes():
     try:
